@@ -49,7 +49,12 @@ public class ForwardController {
 
         return "templates/login";
     }
-
+    /**
+    *
+     * @Description: 注册跳转
+     * @Author: 叶志鹏
+     * @Date: 2018/4/4
+     */
     @RequestMapping(value = "/register", method = RequestMethod.GET)
     public String showRegister(){
 

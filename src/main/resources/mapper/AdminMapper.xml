@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hhit.learn.mapper.AdminMapper">
+
+    <!--admin的resultMap-->
+    <resultMap id="admin" type="com.hhit.learn.entity.AdminEntity">
+        <id column="pk_admin_id" property="pkAdminId"/>
+        <result column="admin_name" property="adminName"/>
+        <result column="admin_password" property="adminPassword"/>
+    </resultMap>
+
+    <!--增加管理员-->
+    <insert id="saveAdmin">
+        INSERT INTO admin (admin_name , admin_password)
+        VALUES (#{adminName},#{adminPassword})
+    </insert>
+    
+    <!--删除管理员-->
+    <delete id="deleteAdmin">
+        DELETE FROM admin 
+        WHERE
+        pk_admin_id=#{pkAdminId} 
+    </delete>
+
+    <!--修改管理员登录密码-->
+    <update id="updateAdminPassword">
+        UPDATE admin
+        SET
+        admin_password=#{adminPassword}
+        WHERE admin_name=#{adminName}
+    </update>
+
+    <!--校验管理员-->
+    <select id="getAdmin" resultMap="admin">
+        SELECT admin_name,admin_password from admin
+        WHERE admin_name=#{adminName}
+        AND admin_password=#{adminPassword}
+    </select>
+
+</mapper>
