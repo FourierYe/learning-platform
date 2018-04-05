@@ -49,16 +49,38 @@ public class ForwardController {
 
         return "templates/login";
     }
+
     /**
-    *
-     * @Description: 注册跳转
-     * @Author: 叶志鹏
-     * @Date: 2018/4/4
+     * Show register string.
+     *
+     * @return the string
      */
     @RequestMapping(value = "/register", method = RequestMethod.GET)
     public String showRegister(){
 
 
         return "templates/register";
+    }
+
+    /**
+     * Show admin login string.
+     *
+     * @return the string
+     */
+    @RequestMapping(value = "/adminLogin", method = RequestMethod.GET)
+    public String showAdminLogin(){
+
+        return "templates/admin_login";
+    }
+
+    /**
+     * Show write string.
+     *
+     * @return the string
+     */
+    @RequestMapping(value = "/write", method = RequestMethod.GET)
+    public String showWrite(){
+
+        return "templates/write";
     }
 }

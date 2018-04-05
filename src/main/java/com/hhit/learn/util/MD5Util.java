@@ -44,7 +44,6 @@ public class MD5Util {
 
             }
             retStr = new String(retChar);
-            System.out.println("retStr>>: " + retStr+"长度"+retStr.length());
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
         }

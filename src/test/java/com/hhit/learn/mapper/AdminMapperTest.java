@@ -35,7 +35,7 @@ public class AdminMapperTest {
     @Test
     public void saveAdminTest(){
 
-        adminMapper.saveAdmin(MD5Util.generateMd5("yezhipeng"),MD5Util.generateMd5("12345678"));
+        adminMapper.saveAdmin(MD5Util.generateMd5("939647181@qq.com"),MD5Util.generateMd5("12345678"));
 
     }
 
@@ -62,7 +62,7 @@ public class AdminMapperTest {
     @Test
     public void updateAdmin(){
 
-        adminMapper.updateAdminPassword("yezhipeng","123456");
+        adminMapper.updateAdminPassword("939647181@qq.com","123456");
 
     }
 
@@ -76,7 +76,7 @@ public class AdminMapperTest {
     @Test
     public void getAdmin(){
 
-        AdminEntity adminEntity=adminMapper.getAdmin("yezhipeng","123");
+        AdminEntity adminEntity=adminMapper.getAdmin(MD5Util.generateMd5("yezhipeng"),MD5Util.generateMd5("12345678"));
         System.out.println(adminEntity.toString());
     }
 }
