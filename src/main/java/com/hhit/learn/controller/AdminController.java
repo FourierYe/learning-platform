@@ -32,7 +32,9 @@ public class AdminController {
      * @param adminService the admin service
      */
     public void setAdminService(AdminService adminService) {
+
         this.adminService = adminService;
+
     }
 
 

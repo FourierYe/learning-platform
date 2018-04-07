@@ -6,71 +6,141 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>管理员主页</title>
+    <!--引入md样式-->
+    <!--<link rel="stylesheet" href="editor.md-master/examples/css/style.css" />-->
+    <link rel="stylesheet" href="editor.md-master/css/editormd.css" />
     <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
     <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
-          crossorigin="anonymous">
+        crossorigin="anonymous">
+    <!--引入Flat UI-->
+    <link href="/dist/css/flat-ui.css" rel="stylesheet">
     <style>
-        #article {
-            margin-top: 50px;
-            text-align: center;
-        }
-
-        #footer {
-            margin-top: 100px;
-        }
-
-        #distance li {
-            margin-left: 60px;
+        .mynavbar{
+            margin-left: 80px;
         }
     </style>
 </head>
 
 <body>
-<!--导航条-->
-<nav class="navbar navbar-default">
-    <div class="container">
-        <!--移动端试图-->
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"
-                    aria-expanded="false">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="#">资料上传系统</a>
-        </div>
-        <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <ul class="nav navbar-nav" id="distance">
-                <li>
-                    <a href="#">资料上传
-                    </a>
-                </li>
-                <li>
-                    <a href="#">资料修改</a>
-                </li>
-                <li>
-                    <a href="#">资料删除</a>
-                </li>
-                <li>
-                    <a href="#">安全退出</a>
-                </li>
-            </ul>
-            <form class="navbar-form navbar-right">
-                <div class="form-group">
-                    <input type="text" class="form-control" placeholder="Search">
+        <!--导航条-->
+        <nav class="navbar navbar-default" role="navigation">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header mynavbar">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse-3">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="sr-only">Toggle navigation</span>
+                </button>
+                <a class="navbar-brand mynavbar" href="#">资料上传系统</a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="navbar-collapse-3">
+                <ul class="nav navbar-nav mynavbar">
+                    <li class="mynavbar active"><a href="#">增加文章</a></li>
+                    <li class="mynavbar"><a href="#">文章修改</a></li>
+                    <li class="mynavbar"><a href="#">文章删除</a></li>
+                    <li class="mynavbar"><a href="#">安全退出</a></li>
+                </ul>
+                <form class="navbar-form navbar-left mynavbar" action="#" role="search">
+                    <div class="form-group">
+                        <div class="input-group">
+                            <input class="form-control" id="navbarInput-01" type="search" placeholder="Search">
+                            <span class="input-group-btn">
+                                <button type="submit" class="btn">
+                                    <span class="fui-search"></span>
+                                </button>
+                            </span>
+                        </div>
+                    </div>
+                </form>
+            </div><!-- /.navbar-collapse -->
+        </nav>
+        <div class="container">
+    <form action="/user/saveArticle" method="post" enctype="multipart/form-data">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4"></div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="exampleInputEmail1" placeholder="文章标题">
+                    </div>
+                    <div class="form-group">
+                        <select data-toggle="select" class="form-control select select-inverse">
+                            <option value="0">数学|物理</option>
+                            <option value="1">化学|生物</option>
+                            <option value="2">电子|计算机</option>
+                            <option value="3">机械|电工</option>
+                            <option value="3">土木|测量</option>
+                            <option value="3">文学|英语</option>
+                            <option value="3">商务|法律</option>
+                        </select>
+                    </div>
                 </div>
-                <button type="submit" class="btn btn-default">Submit</button>
-            </form>
+                <div class="col-md-4"></div>
+            </div>
         </div>
-        <!-- /.navbar-collapse -->
-    </div>
-</nav>
-<!--引入jq文件-->
-<script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
-<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
-<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+        <!--编辑区-->
+        <div class="container">
+            <div id="layout">
+                <div id="test-editormd">
+                    <textarea style="display:none;"></textarea>
+                </div>
+            </div>
+        </div>
+        <div style="text-align: center">
+            <input type="submit" class="btn btn-success" value="提交"/>
+        </div>
+    </form>
+        </div>
+    <script src="editor.md-master/examples/js/jquery.min.js"></script>
+    <script src="editor.md-master/editormd.js"></script>
+    <script type="text/javascript">
+        var testEditor;
+
+        $(function () {
+
+            // You can custom Emoji's graphics files url path
+            editormd.emoji = {
+                path: "http://www.emoji-cheat-sheet.com/graphics/emojis/",
+                ext: ".png"
+            };
+
+            // Twitter Emoji (Twemoji)  graphics files url path    
+            editormd.twemoji = {
+                path: "http://twemoji.maxcdn.com/72x72/",
+                ext: ".png"
+            };
+
+            testEditor = editormd("test-editormd", {
+                width: "90%",
+                height: 720,
+                toc: true,
+
+                emoji: true,       // Support Github emoji, Twitter Emoji(Twemoji), fontAwesome, Editor.md logo emojis.
+
+                taskList: true,
+                path: 'editor.md-master/lib/'
+            });
+        });
+    </script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="/dist/js/flat-ui.min.js"></script>
+
+    <script src="/assets/js/application.js"></script>
+
+    <script>
+        $(document).ready(function(){
+            $('select[name="inverse-dropdown"], select[name="inverse-dropdown-optgroup"], select[name="inverse-dropdown-disabled"]').select({dropdownCssClass: 'select-inverse-dropdown'});
+
+            $('select[name="searchfield"]').select({dropdownCssClass: 'show-select-search'});
+            $('select[name="inverse-dropdown-searchfield"]').select({dropdownCssClass: 'select-inverse-dropdown show-select-search'});
+        });
+    </script>
+    <!--引入jq文件-->
+    <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+    <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
         crossorigin="anonymous"></script>
 </body>
 
