@@ -105,51 +105,57 @@
             <small>The best platform for study and communication </small>
           </h1>
         </div>
-        <form>
+        <#if message??>
+          <h4>${message}</h4>
+        </#if>
+        <form action="/doRegister" method="post">
           <div class="row  justify-content-md-center">
             <div class="col-md-7">
               <h3>Create your personal account</h3>
               <div class="form-group">
-                <label for="#">
+                <label for="username">
                   <h4>Username</h4>
                 </label>
                 </br>
-                <input type="text" class="form-control" id="username" placeholder="请输入用户名，除@外不允许其他符号">
+                <input type="text" class="form-control" id="username" placeholder="请输入用户名，除@外不允许其他符号" name="userName">
               </div>
               <div class="form-group">
-                <label for="#">
+                <label for="studentID">
                   <h4>studentID OR teacherID</h4>
                 </label>
                 </br>
-                <input type="text" class="form-control" id="studentID" placeholder="请输入学号或者教职工号">
+                <input type="text" class="form-control" id="studentID" placeholder="请输入学号或者教职工号" name="userSid">
               </div>
               <div class="form-group">
-                <label for="#">
+                <label for="password">
                   <h4>Password</h4>
+                  <#if passwordMessage??>
+                    <h4>${passwordMessage}</h4>
+                  </#if>
                 </label>
                 </br>
-                <input type="text" class="form-control" id="password" placeholder="请输入密码">
+                <input type="password" class="form-control" id="password" placeholder="请输入密码" name="userPassword">
               </div>
               <div class="form-group">
-                <label for="#">
+                <label for="confirmPassword">
                   <h4>Confirm password</h4>
                 </label>
                 </br>
-                <input type="text" class="form-control" id="confirmPassword" placeholder="请重复密码">
+                <input type="password" class="form-control" id="confirmPassword" placeholder="请重复密码" name="confirmPassword">
               </div>
               <div class="form-group">
-                <label for="#">
+                <label for="College">
                   <h4>College</h4>
                 </label>
                 </br>
-                <input type="text" class="form-control" id="College" placeholder="学院">
+                <input type="text" class="form-control" id="College" placeholder="学院" name="userCollege">
               </div>
               <div class="form-group">
-                <label for="#">
+                <label for="Class">
                   <h4>Class</h4>
                 </label>
                 </br>
-                <input type="text" class="form-control" id="Class" placeholder="请输入班级全名">
+                <input type="text" class="form-control" id="Class" placeholder="请输入班级全名" name="userClass">
               </div>
               <hr/>
               <p>By clicking “Create an account” below, you agree to our terms of service and privacy statement. We’ll occasionally

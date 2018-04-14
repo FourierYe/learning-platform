@@ -4,6 +4,19 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.hhit.learn.mapper.ArticleMapper">
     <resultMap id="article" type="com.hhit.learn.entity.ArticleEntity">
+        <id column="pk_article_id" property="pkArticleId"/>
+        <result column="article_time" property="articleTime"/>
+        <result column="article_category" property="articleCategory"/>
+        <result column="article_title" property="articleTitle"/>
+        <result column="article_content" property="articleContent"/>
 
+        <association property="user" javaType="com.hhit.learn.entity.UserEntity">
+            <id column="pk_user_id" property="pkUserId"/>
+            <result column="user_sid" property="userSid"/>
+            <result column="user_name" property="userName"/>
+            <result column="user_password" property="userPassword"/>
+            <result column="user_college" property="userCollege"/>
+            <result column="user_class" property="userClass"/>
+        </association>
     </resultMap>
 </mapper>
