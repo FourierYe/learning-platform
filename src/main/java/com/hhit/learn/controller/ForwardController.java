@@ -1,9 +1,12 @@
 package com.hhit.learn.controller;
 
+import com.hhit.learn.util.TokenUtil;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
+import javax.servlet.http.HttpSession;
 
 /**
  * The type Forward controller.
@@ -56,9 +59,13 @@ public class ForwardController {
      * @return the string
      */
     @RequestMapping(value = "/register", method = RequestMethod.GET)
-    public String showRegister(){
+    public String showRegister(Model model, HttpSession httpSession){
 
-
+        httpSession.removeAttribute("Session_Token");
+        String Token = new TokenUtil().getToken();
+        System.out.println("表单域的Token"+"----------------------------------"+Token);
+        httpSession.setAttribute("Session_Token", Token);
+        model.addAttribute("Token", Token);
         return "templates/register";
     }
 

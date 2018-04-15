@@ -7,6 +7,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import javax.servlet.http.HttpSession;
 
 /**
  * The type User controller.
@@ -47,26 +51,36 @@ public class UserController {
     public String saveUser(@RequestParam(value = "userSid") String userSid, @RequestParam(value = "userName") String userName,
                            @RequestParam(value = "userPassword") String userPassword, @RequestParam(value = "userCollege") String userCollege,
                            @RequestParam(value = "userClass", defaultValue = "教师") String userClass, @RequestParam(value = "confirmPassword") String confirmPassword,
-                           Model model){
+                           @RequestParam(value = "Token") String Token, Model model, HttpSession httpSession, RedirectAttributes redirectAttributes){
 
-        if(userPassword.equals(confirmPassword)){
+        String SessionToken = (String) httpSession.getAttribute("Session_Token");
+        System.out.println(SessionToken+"---------------------------------");
+        httpSession.removeAttribute("Session_Token");
+        if(SessionToken.equals(Token)) {
+            if (userPassword.equals(confirmPassword)) {
 
+                /**
+                 * 全部改为重定向！*/
+                if (!userSid.equals("") && !userName.equals("") && !userCollege.equals("") && !userPassword.equals("")) {
 
-            if(!userSid.equals("") && !userName.equals("") && !userCollege.equals("") && !userPassword.equals("") ){
+                    userService.saveUser(userSid, userName, userPassword, userCollege, userClass);
+                    return "templates/register";
+                } else {
 
-                userService.saveUser(userSid, userName, userPassword, userCollege, userClass);
-                return "templates/register";
-            }else{
+                    model.addAttribute("message", "表单数据未正确填写，请重新填写");
+                    return "templates/register";
+                }
+            } else {
 
-                model.addAttribute("message","表单数据未正确填写，请重新填写");
+                model.addAttribute("passwordMessage", "两次密码不正确，请重新填写");
                 return "templates/register";
             }
+
         }else {
 
-            model.addAttribute("passwordMessage","两次密码不正确，请重新填写");
-            return "templates/register";
+            redirectAttributes.addAttribute("message", "请不要多次提交表单");
+            ModelAndView modelAndView = new ModelAndView();
+            return "redirect:/register";
         }
-
-
     }
 }
