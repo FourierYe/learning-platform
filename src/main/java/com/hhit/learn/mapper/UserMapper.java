@@ -6,24 +6,40 @@ import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Component;
 
 /**
+ * @author GeekYe
+ * @Description:
+ * @Date 2018 /04/15
  * @program: learn
  * @description: 学生教师的Mapper
  * @author: GeekYe
- * @create: 2018-04-08 12:40
- **/
+ * @create: 2018 -04-08 12:40
+ */
 @Mapper
 @Component
 public interface UserMapper {
 
+
     /**
-    * @Description:  注册用户信息
-    * @Param: userSid 用户的学号教职工号 userName用户的姓名 userPassword用户密码 userCollege用户学院 userClass用户班级
-    * @return: void
-    * @Author: GeekYe
-    * @Date: 2018/4/8
-    */
+     * Save user.
+     *
+     * @param userSid      the user sid
+     * @param userName     the user name
+     * @param userPassword the user password
+     * @param userCollege  the user college
+     * @param userClass    the user class
+     */
     void saveUser(@Param(value = "userSid") String userSid, @Param(value ="userName") String userName,
                   @Param(value = "userPassword") String userPassword, @Param(value = "userCollege") String userCollege,
                   @Param(value = "userClass") String userClass);
 
+
+    /**
+     * Gets user.
+     *
+     * @param userName     the user name
+     * @param userPassword the user password
+     * @return the user
+     */
+    UserEntity getUser(@Param(value = "userName") String userName,
+                       @Param(value = "userPassword") String userPassword);
 }

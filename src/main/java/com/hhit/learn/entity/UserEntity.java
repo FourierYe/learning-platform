@@ -17,9 +17,17 @@ public class UserEntity {
     private String userName;
     private String userPassword;
     private String userCollege;
+    private String userClass;
     private Integer userLimit;
     private List<ArticleEntity> articleEntities;
 
+    public void setUserClass(String userClass) {
+        this.userClass = userClass;
+    }
+
+    public String getUserClass() {
+        return userClass;
+    }
 
     /**
      * Gets article entities.
@@ -155,6 +163,7 @@ public class UserEntity {
                 ", userName='" + userName + '\'' +
                 ", userPassword='" + userPassword + '\'' +
                 ", userCollege='" + userCollege + '\'' +
+                ", userClass='" + userClass + '\'' +
                 ", userLimit=" + userLimit +
                 ", articleEntities=" + articleEntities +
                 '}';

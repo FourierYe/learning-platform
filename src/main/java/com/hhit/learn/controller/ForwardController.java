@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpSession;
 
@@ -48,8 +49,9 @@ public class ForwardController {
      * @return the string
      */
     @RequestMapping(value = "/student/login", method = RequestMethod.GET)
-    public String showLogin(){
-
+    public String showLogin(@RequestParam(value = "message", defaultValue = "") String message,
+                            Model model){
+        model.addAttribute("message", message);
         return "templates/login";
     }
 
@@ -58,14 +60,17 @@ public class ForwardController {
      *
      * @return the string
      */
-    @RequestMapping(value = "/register", method = RequestMethod.GET)
-    public String showRegister(Model model, HttpSession httpSession){
+    @RequestMapping(value = "/register", method = { RequestMethod.POST, RequestMethod.GET })
+    public String showRegister(@RequestParam(value = "message", defaultValue = "") String message,
+                               @RequestParam(value = "passwordMessage", defaultValue = "") String passwordMessage,
+                               Model model, HttpSession httpSession){
 
         httpSession.removeAttribute("Session_Token");
         String Token = new TokenUtil().getToken();
-        System.out.println("表单域的Token"+"----------------------------------"+Token);
         httpSession.setAttribute("Session_Token", Token);
         model.addAttribute("Token", Token);
+        model.addAttribute("message", message);
+        model.addAttribute("passwordMessage", passwordMessage);
         return "templates/register";
     }
 

@@ -13,7 +13,7 @@
         <result column="user_college" property="userCollege"/>
         <result column="user_class" property="userClass"/>
 
-        <collection property="articles" ofType="ArticleEntity">
+        <collection property="articleEntities" ofType="ArticleEntity">
             <id column="pk_article_id" property="pkArticleId"/>
             <result column="user_id" property="userId"/>
             <result column="article_time" property="articleTime"/>
@@ -29,4 +29,10 @@
         VALUES (#{userSid}, #{userName}, #{userPassword}, #{userCollege}, #{userClass})
     </insert>
 
+    <!--查询用户-->
+    <select id="getUser" resultMap="user">
+        SELECT * FROM user
+        WHERE user_Name = #{userName}
+        AND user_Password = #{userPassword}
+    </select>
 </mapper>

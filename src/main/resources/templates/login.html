@@ -30,6 +30,9 @@
           <div class="text-center mb-4">
             <img class="mb-4" src="https://getbootstrap.com/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
             <h1 class="h3 mb-3 font-weight-normal">注意事项</h1>
+            <#if message??>
+              <h4>${message}</h4>
+            </#if>
             <p>增加修改文章只对在校师生开放，请先完成登陆，或得到学校许可证。
                若没有账号请先注册：
               <a href="/register">注册通道</a>
@@ -37,12 +40,12 @@
           </div>
         
           <div class="form-label-group">
-            <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
+            <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus name="userName">
             <label for="inputEmail"></label>
           </div>
         
           <div class="form-label-group">
-            <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+            <input type="password" id="inputPassword" class="form-control" placeholder="Password" required name="userPassword">
             <label for="inputPassword"></label>
           </div>
           <div class="row">
@@ -54,7 +57,7 @@
             </div>
             </div>
             <div class="col-md-4">
-            <label for="basic-url">
+            <label>
               <a href="#">忘记密码</a>
             </label>
             </div>

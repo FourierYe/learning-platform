@@ -1,5 +1,6 @@
 package com.hhit.learn.service;
 
+import com.hhit.learn.entity.UserEntity;
 import com.hhit.learn.mapper.UserMapper;
 import com.hhit.learn.util.MD5Util;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,4 +45,8 @@ public class UserService {
 
     }
 
+    public UserEntity getUser(String userName, String userPassword) {
+
+        return userMapper.getUser(userName, MD5Util.generateMd5(userPassword) );
+    }
 }

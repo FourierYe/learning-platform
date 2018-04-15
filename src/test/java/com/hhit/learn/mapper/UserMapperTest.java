@@ -25,8 +25,13 @@ public class UserMapperTest {
     }
 
     @Test
-    public void saveUser(){
+    public void saveUserTest(){
         userMapper.saveUser("2014123008","叶志鹏","yezhipeng","电子学院","电气142");
 
+    }
+
+    @Test
+    public void getUserTest(){
+        System.out.println(userMapper.getUser("ye939647181@gmail.com","ABF57304A9156A7334FA3A95BBC8E603").toString());
     }
 }
