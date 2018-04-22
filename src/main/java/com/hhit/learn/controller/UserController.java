@@ -1,5 +1,6 @@
 package com.hhit.learn.controller;
 
+import com.hhit.learn.entity.UserEntity;
 import com.hhit.learn.service.UserService;
 import com.hhit.learn.util.RegexUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -103,12 +104,31 @@ public class UserController {
         }
     }
 
-    @RequestMapping(value = "/user/doLogin", method = RequestMethod.POST)
+    /**
+     * Do login string.
+     *
+     * @param userName     the user name
+     * @param userPassword the user password
+     * @return the string
+     */
+    @RequestMapping(value = "/user/doLogin", method = {RequestMethod.POST,RequestMethod.GET})
     public String doLogin(@RequestParam(value = "userName") String userName,
-                          @RequestParam(value = "userPassword") String userPassword){
+                          @RequestParam(value = "userPassword") String userPassword,
+                          HttpSession httpSession, RedirectAttributes redirectAttributes){
 
-        userService.getUser(userName, userPassword);
-        return "";
+        UserEntity userEntity = userService.getUser(userName, userPassword);
+
+        if(userEntity == null){
+
+            redirectAttributes.addAttribute("message","账号密码不正确");
+            return "redirect:/student/login";
+
+        }else {
+
+            httpSession.setAttribute("USER_ID",userEntity.getPkUserId());
+            return "templates/user_home";
+        }
+
     }
 
 

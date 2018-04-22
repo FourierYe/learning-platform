@@ -1,5 +1,6 @@
 package com.hhit.learn.mapper;
 
+import com.hhit.learn.util.MD5Util;
 import org.apache.catalina.User;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -26,7 +27,7 @@ public class UserMapperTest {
 
     @Test
     public void saveUserTest(){
-        userMapper.saveUser("2014123008","叶志鹏","yezhipeng","电子学院","电气142");
+        userMapper.saveUser("2014123008","ye939647181@gmail.com", MD5Util.generateMd5("yezhipeng"),"电子学院","电气142");
 
     }
 

@@ -1,6 +1,9 @@
 package com.hhit.learn.controller;
 
+import com.hhit.learn.entity.ArticleEntity;
+import com.hhit.learn.service.ArticleService;
 import com.hhit.learn.util.TokenUtil;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -8,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 /**
  * The type Forward controller.
@@ -19,6 +23,13 @@ import javax.servlet.http.HttpSession;
  */
 @Controller
 public class ForwardController {
+
+    @Autowired
+    private ArticleService articleService;
+
+    public void setArticleService(ArticleService articleService) {
+        this.articleService = articleService;
+    }
 
     /**
      * Show index string.
@@ -40,6 +51,8 @@ public class ForwardController {
     @RequestMapping(value = "/home", method = RequestMethod.GET)
     public String showHome(Model model){
         //添加数据到model
+        List<ArticleEntity> articleEntityList = articleService.listArticlesOnHome();
+        model.addAttribute("articleEntityList", articleEntityList);
         return "templates/home";
     }
 
@@ -95,4 +108,14 @@ public class ForwardController {
 
         return "templates/write";
     }
+
+    @RequestMapping(value = "/showArticleById", method = RequestMethod.GET)
+    public String showArticle(@RequestParam(value = "articleId") Integer pkArticleId,
+                              Model model){
+
+        ArticleEntity articleEntity = articleService.getArticleById(pkArticleId);
+        model.addAttribute("article", articleEntity);
+        return "templates/article";
+    }
+
 }

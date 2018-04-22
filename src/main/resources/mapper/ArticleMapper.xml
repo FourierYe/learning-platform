@@ -10,7 +10,7 @@
         <result column="article_title" property="articleTitle"/>
         <result column="article_content" property="articleContent"/>
 
-        <association property="user" javaType="com.hhit.learn.entity.UserEntity">
+        <association property="userEntity" javaType="com.hhit.learn.entity.UserEntity">
             <id column="pk_user_id" property="pkUserId"/>
             <result column="user_sid" property="userSid"/>
             <result column="user_name" property="userName"/>
@@ -19,4 +19,29 @@
             <result column="user_class" property="userClass"/>
         </association>
     </resultMap>
+
+    <!--增加一篇文章-->
+    <insert id="saveArticle">
+        INSERT INTO
+        learning_platform.article (user_id, article_time, article_title, article_category, article_content)
+        VALUES (#{userId}, #{articleTime}, #{articleTitle}, #{articleCategory}, #{articleContent})
+    </insert>
+
+    <!--查询将近期文章显示在主页上-->
+    <select id="listArticlesOnHome" resultMap="article">
+        SELECT * FROM learning_platform.article
+        ORDER BY article_time DESC
+        limit 3
+    </select>
+
+    <!--通过Id查询文章-->
+    <select id="getArticleById" resultMap="article">
+        SELECT * FROM  learning_platform.article
+        WHERE pk_article_id = #{pkArticleId}
+    </select>
+
+    <select id="listArticlesByCategory" resultMap="article">
+        SELECT * FROM learning_platform.article
+        WHERE article_category = #{articleCategory}
+    </select>
 </mapper>
