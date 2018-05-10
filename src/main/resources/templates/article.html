@@ -14,14 +14,11 @@
   <link rel="stylesheet" href="/editor.md-master/css/editormd.css" />
 
   <style>
-    .article {
-      margin-top: 50px;
-      text-align: center;
-    }
 
     #footer {
       margin-top: 100px;
     }
+
   </style>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -99,12 +96,12 @@
   </nav>
 
   <!--根据Id展示文章-->
-  <div class="container article">
+  <div class="container">
     <div class="row">
       <div class="col-md-1"></div>
       <div class="col-md-10">
         <div class="page-header">
-          <h2>${article.articleTitle}
+          <h2 style="text-align: center">${article.articleTitle}
             <small>${article.articleCategory}</small>
           </h2>
         </div>

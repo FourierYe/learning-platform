@@ -26,7 +26,6 @@ public interface AdminMapper {
                    @Param(value = "adminPassword") String adminPassword);
 
     /**
-    *
      * @Description: 通过pkAdminID删除admin记录
      * @Param: pkAdminId 为admin的ID
      * @return: void
@@ -36,7 +35,6 @@ public interface AdminMapper {
     void deleteAdmin(@Param(value = "pkAdminId") Integer pkAdminID);
 
     /**
-    *
      * @Description: 通过pkAdminID修改admin记录
      * @Param: pkAdminId 为admin的ID
      * @return: void
@@ -44,10 +42,9 @@ public interface AdminMapper {
      * @Date: 2018/4/4
      */
     void updateAdminPassword(@Param(value = "adminName") String adminName,
-                     @Param(value = "adminPassword") String adminPassword);
+                             @Param(value = "adminPassword") String adminPassword);
 
     /**
-    *
      * @Description: 通过账号密码查询管理员
      * @Param: adminName adminPassword
      * @return: AdminEntity
@@ -57,3 +54,4 @@ public interface AdminMapper {
     AdminEntity getAdmin(@Param(value = "adminName") String adminName,
                          @Param(value = "adminPassword") String adminPassword);
 }
+

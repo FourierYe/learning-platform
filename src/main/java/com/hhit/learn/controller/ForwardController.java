@@ -118,4 +118,16 @@ public class ForwardController {
         return "templates/article";
     }
 
+    @RequestMapping(value = "/user/forwardSaveArticle", method = RequestMethod.GET)
+    public String forwardSaveArticle(){
+
+        return "templates/user_home";
+    }
+
+    @RequestMapping(value = "/user/forwardUploadFile", method = RequestMethod.GET)
+    public String forwardUploadFile(){
+
+        return "templates/upload_file";
+    }
+
 }

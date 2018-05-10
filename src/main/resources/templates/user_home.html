@@ -8,14 +8,15 @@
     <title>管理员主页</title>
     <!--引入md样式-->
     <!--<link rel="stylesheet" href="editor.md-master/examples/css/style.css" />-->
-    <link rel="stylesheet" href="/editor.md-master/css/editormd.css" />
+    <link rel="stylesheet" href="/editor.md-master/css/editormd.css"/>
     <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
-    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
           crossorigin="anonymous">
     <!--引入Flat UI-->
     <link href="/dist/css/flat-ui.css" rel="stylesheet">
     <style>
-        .mynavbar{
+        .mynavbar {
             margin-left: 30px;
         }
     </style>
@@ -56,47 +57,47 @@
         </form>
     </div><!-- /.navbar-collapse -->
 </nav>
+
 <div class="container">
     <form action="/user/saveArticle" method="post" enctype="multipart/form-data">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-4"></div>
-                <div class="col-md-4">
-                    <div class="form-group">
-                        <input type="text" class="form-control" id="exampleInputEmail1" placeholder="文章标题" name="articleTitle">
-                    </div>
-                    <div class="form-group">
-                        <select data-toggle="select" class="form-control select select-inverse" name="articleCategory">
-                            <option value="数学物理">数学|物理</option>
-                            <option value="化学生物">化学|生物</option>
-                            <option value="电子计算机">电子|计算机</option>
-                            <option value="机械电工">机械|电工</option>
-                            <option value="土木测量">土木|测量</option>
-                            <option value="文学英语">文学|英语</option>
-                            <option value="商务法律">商务|法律</option>
-                        </select>
-                    </div>
+        <div class="row">
+            <div class="col-md-4"></div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <input type="text" class="form-control" id="exampleInputEmail1" placeholder="文章标题"
+                           name="articleTitle">
                 </div>
-                <div class="col-md-4"></div>
+                <div class="form-group">
+                    <select data-toggle="select" class="form-control select select-inverse" name="articleCategory">
+                        <option value="数学物理">数学|物理</option>
+                        <option value="化学生物">化学|生物</option>
+                        <option value="电子计算机">电子|计算机</option>
+                        <option value="机械电工">机械|电工</option>
+                        <option value="土木测量">土木|测量</option>
+                        <option value="文学英语">文学|英语</option>
+                        <option value="商务法律">商务|法律</option>
+                    </select>
+                </div>
             </div>
+            <div class="col-md-4"></div>
         </div>
         <!--编辑区-->
-        <div class="container">
-            <div id="layout">
-                <div id="test-editormd">
-                    <textarea class="editormd-markdown-textarea" name="test-editormd-markdown-doc"></textarea>
-                    <!-- 第二个隐藏文本域，用来构造生成的HTML代码，方便表单POST提交，这里的name可以任意取，后台接受时以这个name键为准 -->
-                    <textarea class="editormd-html-textarea" name="articleContent"></textarea>                </div>
-            </div>
+        <div id="layout">
+            <div id="test-editormd">
+                <textarea class="editormd-markdown-textarea" name="test-editormd-markdown-doc"></textarea>
+                <!-- 第二个隐藏文本域，用来构造生成的HTML代码，方便表单POST提交，这里的name可以任意取，后台接受时以这个name键为准 -->
+                <textarea class="editormd-html-textarea" name="articleContent"></textarea></div>
         </div>
         <div style="text-align: center">
             <input type="submit" class="btn btn-success" value="提交"/>
         </div>
     </form>
 </div>
+
 <script src="/editor.md-master/examples/js/jquery.min.js"></script>
 <script src="/editor.md-master/editormd.js"></script>
 <script type="text/javascript">
+
     var testEditor;
 
     $(function () {
@@ -119,19 +120,19 @@
             toc: true,
             tex: true,
             tocm: true,
-            flowChart : true,
-            sequenceDiagram : true,
-            syncScrolling : "single",
+            flowChart: true,
+            sequenceDiagram: true,
+            syncScrolling: "single",
             emoji: true,       // Support Github emoji, Twitter Emoji(Twemoji), fontAwesome, Editor.md logo emojis.
             taskList: true,
             path: "/editor.md-master/lib/",
             //这个配置在simple.html中并没有，但是为了能够提交表单，使用这个配置可以让构造出来的HTML代码直接在第二个隐藏的textarea域中，方便post提交表单。
-            saveHTMLToTextarea : true,
+            saveHTMLToTextarea: true,
 
             /**上传图片相关配置如下*/
-            imageUpload : true,
-            imageFormats : ["jpg", "jpeg", "gif", "png", "bmp", "webp"],
-            imageUploadURL : "/user/article/uploadPic",//注意你后端的上传图片服务地址
+            imageUpload: true,
+            imageFormats: ["jpg", "jpeg", "gif", "png", "bmp", "webp"],
+            imageUploadURL: "/user/article/uploadPic",//注意你后端的上传图片服务地址
         });
     });
 </script>
@@ -141,7 +142,7 @@
 <script src="/assets/js/application.js"></script>
 
 <script>
-    $(document).ready(function(){
+    $(document).ready(function () {
         $('select[name="inverse-dropdown"], select[name="inverse-dropdown-optgroup"], select[name="inverse-dropdown-disabled"]').select({dropdownCssClass: 'select-inverse-dropdown'});
 
         $('select[name="searchfield"]').select({dropdownCssClass: 'show-select-search'});
@@ -151,7 +152,8 @@
 <!--引入jq文件-->
 <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
 <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
-<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"
+        integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
         crossorigin="anonymous"></script>
 </body>
 

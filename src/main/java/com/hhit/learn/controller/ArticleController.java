@@ -41,7 +41,7 @@ public class ArticleController {
      * @param httpSession     the http session
      */
     @RequestMapping(value = "/user/saveArticle", method = RequestMethod.POST)
-    public void saveArticle(@RequestParam(value = "articleTitle") String articleTitle,
+    public String saveArticle(@RequestParam(value = "articleTitle") String articleTitle,
                             @RequestParam(value = "articleCategory") String articleCategory,
                             @RequestParam(value = "articleContent") String articleContent,
                             HttpSession httpSession){
@@ -50,6 +50,7 @@ public class ArticleController {
 
         articleService.saveArticle(userId, articleTitle, articleCategory, articleContent);
 
+        return "templates/article_file";
     }
 
 
