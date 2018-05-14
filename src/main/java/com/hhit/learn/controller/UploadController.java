@@ -19,17 +19,26 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 /**
+ * The type Upload controller.
+ *
  * @program: learn
  * @description: 用于上传文件的Controller
  * @author: GeekYe
- * @create: 2018-04-19 23:28
- **/
+ * @create: 2018 -04-19 23:28
+ */
 @Controller
 public class UploadController {
 
     private static final Logger logger = LoggerFactory.getLogger(UploadController.class);
 
 
+    /**
+     * Upload pic.
+     *
+     * @param request  the request
+     * @param response the response
+     * @param attach   the attach
+     */
     @RequestMapping(value="/user/article/uploadPic", method= RequestMethod.POST)
     public void uploadPic(HttpServletRequest request, HttpServletResponse response,
                           @RequestParam(value = "editormd-image-file", required = false) MultipartFile attach){
@@ -64,6 +73,12 @@ public class UploadController {
         }
     }
 
+    /**
+     * Handle file upload string.
+     *
+     * @param request the request
+     * @return the string
+     */
     @RequestMapping(value = "/uploadFile", method = RequestMethod.POST)
     @ResponseBody
     public String handleFileUpload(HttpServletRequest request) {

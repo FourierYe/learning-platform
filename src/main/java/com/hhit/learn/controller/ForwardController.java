@@ -27,6 +27,11 @@ public class ForwardController {
     @Autowired
     private ArticleService articleService;
 
+    /**
+     * Sets article service.
+     *
+     * @param articleService the article service
+     */
     public void setArticleService(ArticleService articleService) {
         this.articleService = articleService;
     }
@@ -59,6 +64,8 @@ public class ForwardController {
     /**
      * Show login string.
      *
+     * @param message the message
+     * @param model   the model
      * @return the string
      */
     @RequestMapping(value = "/student/login", method = RequestMethod.GET)
@@ -71,6 +78,10 @@ public class ForwardController {
     /**
      * Show register string.
      *
+     * @param message         the message
+     * @param passwordMessage the password message
+     * @param model           the model
+     * @param httpSession     the http session
      * @return the string
      */
     @RequestMapping(value = "/register", method = { RequestMethod.POST, RequestMethod.GET })
@@ -109,6 +120,13 @@ public class ForwardController {
         return "templates/write";
     }
 
+    /**
+     * Show article string.
+     *
+     * @param pkArticleId the pk article id
+     * @param model       the model
+     * @return the string
+     */
     @RequestMapping(value = "/showArticleById", method = RequestMethod.GET)
     public String showArticle(@RequestParam(value = "articleId") Integer pkArticleId,
                               Model model){
@@ -118,12 +136,22 @@ public class ForwardController {
         return "templates/article";
     }
 
+    /**
+     * Forward save article string.
+     *
+     * @return the string
+     */
     @RequestMapping(value = "/user/forwardSaveArticle", method = RequestMethod.GET)
     public String forwardSaveArticle(){
 
         return "templates/user_home";
     }
 
+    /**
+     * Forward upload file string.
+     *
+     * @return the string
+     */
     @RequestMapping(value = "/user/forwardUploadFile", method = RequestMethod.GET)
     public String forwardUploadFile(){
 

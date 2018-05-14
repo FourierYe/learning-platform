@@ -6,6 +6,8 @@ import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Component;
 
 /**
+ * The interface User mapper.
+ *
  * @author GeekYe
  * @Description:
  * @Date 2018 /04/15

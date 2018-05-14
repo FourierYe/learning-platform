@@ -45,6 +45,13 @@ public class UserService {
 
     }
 
+    /**
+     * Gets user.
+     *
+     * @param userName     the user name
+     * @param userPassword the user password
+     * @return the user
+     */
     public UserEntity getUser(String userName, String userPassword) {
 
         return userMapper.getUser(userName, MD5Util.generateMd5(userPassword) );

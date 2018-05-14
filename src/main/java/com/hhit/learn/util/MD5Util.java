@@ -4,11 +4,13 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 /**
+ * The type Md 5 util.
+ *
  * @program: learn
  * @description: 账号的MD5加密工具
  * @author: 叶志鹏
- * @create: 2018-04-04 11:45
- **/
+ * @create: 2018 -04-04 11:45
+ */
 public class MD5Util {
     /**
      * Generate md 5 string.
