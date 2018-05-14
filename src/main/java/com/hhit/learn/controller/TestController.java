@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.sql.DriverManager;
 import java.util.List;
 
 /**
@@ -48,4 +49,8 @@ public class TestController {
         return "templates/article_file";
     }
 
+    public void test(){
+
+        DriverManager.getConnection("")
+    }
 }
