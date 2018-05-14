@@ -107,8 +107,10 @@ public class UserController {
     /**
      * Do login string.
      *
-     * @param userName     the user name
-     * @param userPassword the user password
+     * @param userName           the user name
+     * @param userPassword       the user password
+     * @param httpSession        the http session
+     * @param redirectAttributes the redirect attributes
      * @return the string
      */
     @RequestMapping(value = "/user/doLogin", method = {RequestMethod.POST,RequestMethod.GET})

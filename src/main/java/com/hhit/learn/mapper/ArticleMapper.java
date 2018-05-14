@@ -10,6 +10,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * The interface Article mapper.
+ *
  * @author GeekYe
  * @Description:
  * @Date 2018 /04/08

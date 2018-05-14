@@ -21,10 +21,20 @@ public class UserEntity {
     private Integer userLimit;
     private List<ArticleEntity> articleEntities;
 
+    /**
+     * Sets user class.
+     *
+     * @param userClass the user class
+     */
     public void setUserClass(String userClass) {
         this.userClass = userClass;
     }
 
+    /**
+     * Gets user class.
+     *
+     * @return the user class
+     */
     public String getUserClass() {
         return userClass;
     }

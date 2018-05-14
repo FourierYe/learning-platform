@@ -6,6 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 /**
  * The type Learn application.
+ *
  * @author GeekYe
  */
 @SpringBootApplication

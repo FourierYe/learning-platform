@@ -6,23 +6,21 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
+ * The type Sub html.
+ *
  * @program: learn
  * @description: HTML截取的工具类
  * @author: GeekYe
- * @create: 2018-04-19 21:32
- **/
+ * @create: 2018 -04-19 21:32
+ */
 public class SubHTML {
     /**
-     *
      * 按字节长度截取字符串(支持截取带HTML代码样式的字符串)
      *
-     * @param param
-     *            将要截取的字符串参数
-     * @param length
-     *            截取的字节长度
-     * @param end
-     *            字符串末尾补上的字符串
-     * @return 返回截取后的字符串
+     * @param param  将要截取的字符串参数
+     * @param length 截取的字节长度
+     * @param end    字符串末尾补上的字符串
+     * @return 返回截取后的字符串 string
      */
     public static String subStringHTML(String param, int length, String end) {
         StringBuffer result = new StringBuffer();

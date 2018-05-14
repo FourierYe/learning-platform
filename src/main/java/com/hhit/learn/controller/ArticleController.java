@@ -39,6 +39,7 @@ public class ArticleController {
      * @param articleCategory the article category
      * @param articleContent  the article content
      * @param httpSession     the http session
+     * @return the string
      */
     @RequestMapping(value = "/user/saveArticle", method = RequestMethod.POST)
     public String saveArticle(@RequestParam(value = "articleTitle") String articleTitle,
