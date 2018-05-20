@@ -71,8 +71,4 @@ public class TestController {
         return "templates/article_file";
     }
 
-    public void test(){
-
-        DriverManager.getConnection("")
-    }
 }

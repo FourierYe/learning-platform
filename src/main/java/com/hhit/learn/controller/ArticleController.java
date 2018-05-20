@@ -1,8 +1,10 @@
 package com.hhit.learn.controller;
 
+import com.hhit.learn.entity.ArticleEntity;
 import com.hhit.learn.service.ArticleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -41,15 +43,21 @@ public class ArticleController {
      * @param httpSession     the http session
      * @return the string
      */
+    @Transactional(rollbackFor = Exception.class)
     @RequestMapping(value = "/user/saveArticle", method = RequestMethod.POST)
     public String saveArticle(@RequestParam(value = "articleTitle") String articleTitle,
                             @RequestParam(value = "articleCategory") String articleCategory,
                             @RequestParam(value = "articleContent") String articleContent,
                             HttpSession httpSession){
 
+        System.out.println("controller"+articleContent);
+
         Integer userId = (Integer) httpSession.getAttribute("USER_ID");
 
         articleService.saveArticle(userId, articleTitle, articleCategory, articleContent);
+        ArticleEntity articleEntity = articleService.getArticleByUserTimeLimitOne(userId);
+
+        httpSession.setAttribute("articleId", articleEntity.getPkArticleId().toString());
 
         return "templates/article_file";
     }

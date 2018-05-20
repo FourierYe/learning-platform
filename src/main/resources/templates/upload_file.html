@@ -58,6 +58,9 @@
                 <div class="col-md-2"></div>
                 <div class="col-md-8">
                     <form action="/uploadFile" method="post" id="file-form" enctype="multipart/form-data">
+                        <#if message??>
+                            <h5>${message}</h5>
+                        </#if>
                         <div class="form-group">
                             <div style="float:left;width:100%">
                                 <input id="fname" type="text" tabindex="1" multiple
@@ -79,35 +82,39 @@
             </div>
             <br/>
             <!--表格，从后端读取，可排序-->
-            <div class="row">
-                <div class="col-md-3"></div>
-                <div class="col-md-6">
-                    <table class="table">
-                        <tr>
-                            <th>
-                                <div class="btn-group">
-                                    <button type="button" class="btn btn-success " aria-haspopup="true"
-                                            aria-expanded="false">
-                                        文件名
-                                    </button>
-                                </div>
-                            </th>
-                            <th style="text-align: right">
-                                <button type="button" class="btn btn-info" >操作</button>
-                            </th>
-                        </tr>
-                        <tr>
-                            <td></td>
-                            <td style="text-align: right"><!-- Single button -->
-                                <a href="#" class="btn btn-info" aria-haspopup="true" aria-expanded="false">
-                                    删除
-                                </a>
-                            </td>
-                        </tr>
-                    </table>
+            <#if filesname??>
+                <div class="row">
+                    <div class="col-md-2"></div>
+                    <div class="col-md-8">
+                        <table class="table">
+                            <tr>
+                                <th>
+                                    <div class="btn-group">
+                                        <button type="button" class="btn btn-success " aria-haspopup="true"
+                                                aria-expanded="false">
+                                            文件名
+                                        </button>
+                                    </div>
+                                </th>
+                                <th style="text-align: right">
+                                    <button type="button" class="btn btn-info" >操作</button>
+                                </th>
+                            </tr>
+                            <#list filesname as filename>
+                                <tr>
+                                    <td>${filename}</td>
+                                    <td style="text-align: right"><!-- Single button -->
+                                        <a href="/user/deleteFile?filename=${filename}" class="btn btn-info" aria-haspopup="true" aria-expanded="false">
+                                                    删除
+                                        </a>
+                                    </td>
+                                </tr>
+                            </#list>
+                        </table>
+                    </div>
+                    <div class="col-md-2"></div>
                 </div>
-                <div class="col-md-3"></div>
-            </div>
+            </#if>
         </div>
 
         <script type="text/javascript">

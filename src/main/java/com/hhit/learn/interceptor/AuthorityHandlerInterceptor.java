@@ -19,7 +19,7 @@ import javax.servlet.http.HttpServletResponse;
 public class AuthorityHandlerInterceptor implements HandlerInterceptor {
 
     private static Logger logger = LoggerFactory.getLogger(AuthorityHandlerInterceptor.class);
-    public static final String SESSION_JUDGE = "SessionJudge";
+    public static final String SESSION_USER_ID = "USER_ID";
 
     @Override
     public boolean preHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o) throws Exception {
@@ -38,7 +38,7 @@ public class AuthorityHandlerInterceptor implements HandlerInterceptor {
     @Override
     public void postHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o, ModelAndView modelAndView) throws Exception {
         logger.info("拦截器postHandle");
-        if(httpServletRequest.getSession().getAttribute(SESSION_JUDGE)==null){
+        if(httpServletRequest.getSession().getAttribute(SESSION_USER_ID)==null){
             modelAndView.addObject("error","请先登陆您的账号");
             modelAndView.setViewName("/templates/login");
         }

@@ -78,4 +78,11 @@ public class ArticleMapperTest {
             System.out.println(a.toString());
         }
     }
+
+    @Test
+    public void getArticleByUserTimeLimitOneTest(){
+
+        ArticleEntity articleEntity = articleMapper.getArticleByUserTimeLimitOne(16);
+        System.out.println(articleEntity.toString());
+    }
 }

@@ -22,7 +22,7 @@ public class AuthorityInterceptor extends WebMvcConfigurerAdapter {
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(new AuthorityHandlerInterceptor())
                 //添加需要验证登录用户操作权限的请求
-                .addPathPatterns("/user/**");
+                .addPathPatterns("/user/**").excludePathPatterns("/user/doLogin");
         //排除不需要验证登录用户操作权限的请求
 
     }

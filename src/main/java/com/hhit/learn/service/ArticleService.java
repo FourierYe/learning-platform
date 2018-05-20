@@ -45,6 +45,7 @@ public class ArticleService {
     @Transactional(rollbackFor = Exception.class)
     public void saveArticle(Integer userId, String articleTitle, String articleCategory, String articleContent){
 
+        System.out.println("service"+articleContent);
         Date date = new Date();
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy年MM月dd日 HH:mm:SS");
         String articleTime = simpleDateFormat.format(date);
@@ -78,5 +79,16 @@ public class ArticleService {
     public ArticleEntity getArticleById(Integer pkArticleId){
 
         return articleMapper.getArticleById(pkArticleId);
+    }
+
+    /**
+     * Get article by user time limit one article entity.
+     *
+     * @param userId the user id
+     * @return the article entity
+     */
+    public ArticleEntity getArticleByUserTimeLimitOne(Integer userId){
+
+        return articleMapper.getArticleByUserTimeLimitOne(userId);
     }
 }

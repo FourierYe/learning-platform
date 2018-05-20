@@ -44,4 +44,12 @@
         SELECT * FROM learning_platform.article
         WHERE article_category = #{articleCategory}
     </select>
+
+    <!---->
+    <select id="getArticleByUserTimeLimitOne" resultMap="article">
+        select * from learning_platform.article
+        where user_id = #{userId}
+        order BY article_time DESC
+        limit 1
+    </select>
 </mapper>

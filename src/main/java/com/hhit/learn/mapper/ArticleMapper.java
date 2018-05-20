@@ -58,4 +58,12 @@ public interface ArticleMapper {
      * @return the list
      */
     List<ArticleEntity> listArticlesByCategory(@Param(value = "articleCategory") String articleCategory);
+
+    /**
+     * Gets article by time limit one.
+     *
+     * @return the article by time limit one
+     */
+    ArticleEntity getArticleByUserTimeLimitOne(@Param(value = "userId") Integer userId);
+
 }

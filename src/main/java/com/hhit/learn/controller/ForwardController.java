@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpSession;
+import java.io.File;
 import java.util.List;
 
 /**
@@ -130,6 +131,9 @@ public class ForwardController {
     @RequestMapping(value = "/showArticleById", method = RequestMethod.GET)
     public String showArticle(@RequestParam(value = "articleId") Integer pkArticleId,
                               Model model){
+        File file = new File("/Files"+"/"+pkArticleId.toString());
+        String [] filesName = file.list();
+        model.addAttribute("filesName", filesName);
 
         ArticleEntity articleEntity = articleService.getArticleById(pkArticleId);
         model.addAttribute("article", articleEntity);
@@ -153,8 +157,13 @@ public class ForwardController {
      * @return the string
      */
     @RequestMapping(value = "/user/forwardUploadFile", method = RequestMethod.GET)
-    public String forwardUploadFile(){
+    public String forwardUploadFile(Model model, HttpSession httpSession){
 
+        String articleId = (String) httpSession.getAttribute("articleId");
+
+        File file = new File("/Files"+"/"+articleId);
+        String [] filesname = file.list();
+        model.addAttribute("filesname", filesname);
         return "templates/upload_file";
     }
 
