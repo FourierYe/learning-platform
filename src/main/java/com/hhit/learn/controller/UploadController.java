@@ -161,7 +161,7 @@ public class UploadController {
      * @param fileName  the file name
      * @param articleId the article id
      */
-    @RequestMapping("/download")
+    @RequestMapping("/downloadFile")
     public void downloadFile(HttpServletRequest request, HttpServletResponse response,
                              @Param(value = "fileName") String fileName, @Param(value = "articleId") String articleId) {
 

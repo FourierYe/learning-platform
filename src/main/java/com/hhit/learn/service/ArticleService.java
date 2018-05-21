@@ -1,5 +1,7 @@
 package com.hhit.learn.service;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.hhit.learn.entity.ArticleEntity;
 import com.hhit.learn.mapper.ArticleMapper;
 import com.hhit.learn.util.SubHTML;
@@ -90,5 +92,51 @@ public class ArticleService {
     public ArticleEntity getArticleByUserTimeLimitOne(Integer userId){
 
         return articleMapper.getArticleByUserTimeLimitOne(userId);
+    }
+
+    /**
+     * List articles by category list.
+     *
+     * @param articleCategory the article category
+     * @param pageNum         the page num
+     * @return the list
+     */
+    public PageInfo listArticlesByCategory(String articleCategory, Integer pageNum){
+
+        PageHelper.startPage(pageNum,5);
+        List<ArticleEntity> articleEntityList = articleMapper.listArticlesByCategory(articleCategory);
+        for (ArticleEntity article: articleEntityList
+             ) {
+            article.setArticleContent(SubHTML.subStringHTML(article.getArticleContent(),600 , "..."));
+        }
+
+        PageInfo pageInfo = new PageInfo(articleEntityList);
+
+        return pageInfo ;
+
+    }
+
+    /**
+     * Get article by direction page info.
+     *
+     * @param pageNum the page num
+     * @return the page info
+     */
+    public PageInfo getArticleByDirectionPrevious(Integer pageNum){
+
+        PageHelper.startPage(pageNum, 1);
+//        articleMapper.
+        return null;
+    }
+
+    /**
+     * Count before article id integer.
+     *
+     * @param articleId the article id
+     * @return the integer
+     */
+    public Integer countBeforeArticleId(Integer articleId){
+
+        return articleMapper.countBeforeArticleId(articleId);
     }
 }

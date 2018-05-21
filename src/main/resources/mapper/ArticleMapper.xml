@@ -45,11 +45,23 @@
         WHERE article_category = #{articleCategory}
     </select>
 
-    <!---->
+    <!--获取用户最新插入的文章-->
     <select id="getArticleByUserTimeLimitOne" resultMap="article">
         select * from learning_platform.article
         where user_id = #{userId}
         order BY article_time DESC
         limit 1
+    </select>
+    
+    <!--统计articleId之前多少行-->
+    <select id="countBeforeArticleId" resultType="Integer">
+        select count(*) from learning_platform.article
+        where #{articleId}>pk_article_id
+    </select>
+
+    <!--根据articleId顺序查文件-->
+    <select id="listArticleByArticleIdSequence" resultMap="article">
+        SELECT * FROM learning_platform.article
+        ORDER BY pk_article_id ASC
     </select>
 </mapper>

@@ -62,8 +62,23 @@ public interface ArticleMapper {
     /**
      * Gets article by time limit one.
      *
+     * @param userId the user id
      * @return the article by time limit one
      */
     ArticleEntity getArticleByUserTimeLimitOne(@Param(value = "userId") Integer userId);
 
+    /**
+     * Count before article id integer.
+     *
+     * @param articleId the article id
+     * @return the integer
+     */
+    Integer countBeforeArticleId(@Param(value = "articleId") Integer articleId);
+
+    /**
+     * List article by article id sequence list.
+     *
+     * @return the list
+     */
+    List<ArticleEntity> listArticleByArticleIdSequence();
 }

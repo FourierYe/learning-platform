@@ -1,6 +1,7 @@
 package com.hhit.learn.mapper;
 
 import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.hhit.learn.entity.ArticleEntity;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -84,5 +85,37 @@ public class ArticleMapperTest {
 
         ArticleEntity articleEntity = articleMapper.getArticleByUserTimeLimitOne(16);
         System.out.println(articleEntity.toString());
+    }
+
+    @Test
+    public void listArticlesByCategoryTest(){
+        PageHelper.startPage(1,5);
+        List<ArticleEntity> articleEntityList = articleMapper.listArticlesByCategory("数学物理");
+        PageInfo pageInfo = new PageInfo(articleEntityList);
+        System.out.println("查询出来的总行数----------------------"+pageInfo.getTotal());
+        for (ArticleEntity a: articleEntityList
+             ) {
+
+        }
+//        System.out.println(articleEntityList.size());
+    }
+
+    @Test
+    public void countBeforeArticleIdTest(){
+
+        Integer num = articleMapper.countBeforeArticleId(120);
+
+        System.out.println(num);
+    }
+
+    @Test
+    public void listArticleByArticleIdSequence(){
+
+        List<ArticleEntity> articleEntityList = articleMapper.listArticleByArticleIdSequence();
+
+        for (ArticleEntity a: articleEntityList
+             ) {
+            System.out.println(a.getPkArticleId());
+        }
     }
 }

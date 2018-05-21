@@ -1,8 +1,10 @@
 package com.hhit.learn.controller;
 
+import com.github.pagehelper.PageInfo;
 import com.hhit.learn.entity.ArticleEntity;
 import com.hhit.learn.service.ArticleService;
 import com.hhit.learn.util.TokenUtil;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -134,9 +136,12 @@ public class ForwardController {
         File file = new File("/Files"+"/"+pkArticleId.toString());
         String [] filesName = file.list();
         model.addAttribute("filesName", filesName);
-
+        model.addAttribute("articleId", pkArticleId.toString());
         ArticleEntity articleEntity = articleService.getArticleById(pkArticleId);
         model.addAttribute("article", articleEntity);
+        Integer beforeNum = articleService.countBeforeArticleId(pkArticleId);
+        model.addAttribute("beforeNum", beforeNum);
+
         return "templates/article";
     }
 
@@ -154,6 +159,8 @@ public class ForwardController {
     /**
      * Forward upload file string.
      *
+     * @param model       the model
+     * @param httpSession the http session
      * @return the string
      */
     @RequestMapping(value = "/user/forwardUploadFile", method = RequestMethod.GET)
@@ -167,4 +174,46 @@ public class ForwardController {
         return "templates/upload_file";
     }
 
+    /**
+     * Show articles by category string.
+     *
+     * @return the string
+     */
+    @RequestMapping(value = "/showArticlesByCategory")
+    public String showArticlesByCategory(@RequestParam(value = "articleCategory", defaultValue = "数学物理") String articleCategory,
+                                         @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum,
+                                         Model model){
+
+
+        PageInfo pageInfo = articleService.listArticlesByCategory(articleCategory, pageNum);
+
+        //要返回的articleEntityList
+        List<ArticleEntity> articleEntityList = pageInfo.getList();
+        //获取页数
+        Integer pages = pageInfo.getPages();
+
+        model.addAttribute("articleEntityList", articleEntityList);
+        model.addAttribute("pages", pages);
+        model.addAttribute("pageNum", pageNum);
+        model.addAttribute("articleCategory", articleCategory);
+
+        return "templates/articles";
+    }
+
+    @RequestMapping(value = "/getArticleByDirection", method = RequestMethod.GET)
+    public String getArticleByDirection(@RequestParam(value = "beforeNum") Integer beforeNum,
+                                        @RequestParam(value = "direction") String direction){
+
+        if(direction.equals("Previous")){
+
+            return "";
+        }
+
+        if(direction.equals("Next")){
+
+            return "";
+        }
+
+        return "";
+    }
 }
