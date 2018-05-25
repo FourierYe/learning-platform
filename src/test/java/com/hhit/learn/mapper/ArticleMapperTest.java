@@ -118,4 +118,15 @@ public class ArticleMapperTest {
             System.out.println(a.getPkArticleId());
         }
     }
+
+    @Test
+    public void listArticlesByUserId(){
+
+        List<ArticleEntity> articleEntityList = articleMapper.listArticlesByUserId(16);
+
+        for (ArticleEntity a : articleEntityList
+             ) {
+            System.out.println(a.toString());
+        }
+    }
 }

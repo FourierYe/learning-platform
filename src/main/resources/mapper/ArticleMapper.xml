@@ -64,4 +64,16 @@
         SELECT * FROM learning_platform.article
         ORDER BY pk_article_id ASC
     </select>
+
+    <!--查询该用户下的文章列表-->
+    <select id="listArticlesByUserId" resultMap="article">
+        SELECT * FROM learning_platform.article
+        WHERE user_id = #{userId}
+    </select>
+
+    <!--删除文章-->
+    <delete id="deleteArticle">
+        delete from learning_platform.article
+        where pk_article_id = #{articleId}
+    </delete>
 </mapper>

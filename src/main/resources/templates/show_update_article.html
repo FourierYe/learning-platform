@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <title>修改文章</title>
+    <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+          crossorigin="anonymous">
+    <!--引入Flat UI-->
+    <link href="/dist/css/flat-ui.css" rel="stylesheet">
+    <style>
+        .mynavbar {
+            margin-left: 30px;
+        }
+    </style>
+</head>
+<body>
+<!--导航条-->
+<nav class="navbar navbar-default" role="navigation">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header mynavbar">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse-3">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="sr-only">Toggle navigation</span>
+            <span class="sr-only">Toggle navigation</span>
+        </button>
+        <a class="navbar-brand mynavbar" href="#">资料上传系统</a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="navbar-collapse-3">
+        <ul class="nav navbar-nav mynavbar">
+            <li class="mynavbar active"><a href="/user/showSaveArticle">增加文章</a></li>
+            <li class="mynavbar"><a href="/user/showUpdateArticle">文章修改</a></li>
+            <li class="mynavbar"><a href="/user/showDeleteArticle">文章删除</a></li>
+            <li class="mynavbar"><a href="/safetyExit">安全退出</a></li>
+        </ul>
+        <form class="navbar-form navbar-left mynavbar" action="#" role="search">
+            <div class="form-group">
+                <div class="input-group">
+                    <input class="form-control" id="navbarInput-01" type="search" placeholder="Search">
+                    <span class="input-group-btn">
+                                        <button type="submit" class="btn">
+                                            <span class="fui-search"></span>
+                                        </button>
+                                    </span>
+                </div>
+            </div>
+        </form>
+    </div><!-- /.navbar-collapse -->
+</nav>
+
+<#if articleEntityList??>
+<div class="container">
+    <div class="row">
+        <div class="col-md-1"></div>
+        <div class="col-md-9">
+            <table class="table table-hover table-bordered" style="text-align: left">
+                <tr>
+                    <td>文章标题</td>
+                    <td>文章类别</td>
+                    <td>时间</td>
+                    <td>操作</td>
+                </tr>
+                <#list articleEntityList as article>
+                <tr>
+                    <td>${article.articleTitle}</td>
+                    <td>${article.articleCategory}</td>
+                    <td>${article.articleTime}</td>
+                    <td>
+                        <a href="/user/#?articleId=${article.pkArticleId}" class="btn btn-info" aria-haspopup="true" aria-expanded="false">
+                            修改
+                        </a>
+                    </td>
+                </tr>
+            </#list>
+            </table>
+        </div>
+        <div class="col-md-1"></div>
+    </div>
+</div>
+</#if>
+<!--分页链接-->
+<#if pages??>
+<div class="container" style="text-align: center">
+    <nav aria-label="Page navigation">
+        <#if pages!=0>
+        <ul class="pagination">
+            <li>
+                <a href="/user/showUpdateArticle?pageNum=${pageNum-1}" aria-label="Previous"><span aria-hidden="true">&laquo;</span>
+                </a>
+            </li>
+            <#list 1..pages!1 as i>
+            <#if pageNum==i>
+            <li class="active">
+                <a href="/user/showUpdateArticle?pageNum=${i}">${i}
+                </a>
+            </li>
+            <#else/>
+            <li>
+                <a href="/user/showUpdateArticle?pageNum=${i}">${i}
+                </a>
+            </li>
+        </#if>
+    </#list>
+    <li>
+        <a href="/user/showUpdateArticle?pageNum=${pageNum+1}" aria-label="Next">
+            <span aria-hidden="true">&raquo;</span>
+        </a>
+    </li>
+    </ul>
+</#if>
+</nav>
+</div>
+</#if>
+
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="/dist/js/flat-ui.min.js"></script>
+
+<script src="/assets/js/application.js"></script>
+
+<script>
+    $(document).ready(function () {
+        $('select[name="inverse-dropdown"], select[name="inverse-dropdown-optgroup"], select[name="inverse-dropdown-disabled"]').select({dropdownCssClass: 'select-inverse-dropdown'});
+
+        $('select[name="searchfield"]').select({dropdownCssClass: 'show-select-search'});
+        $('select[name="inverse-dropdown-searchfield"]').select({dropdownCssClass: 'select-inverse-dropdown show-select-search'});
+    });
+</script>
+<!--引入jq文件-->
+<script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"
+        integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+        crossorigin="anonymous"></script>
+</body>
+</html>

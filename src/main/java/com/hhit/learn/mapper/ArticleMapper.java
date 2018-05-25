@@ -81,4 +81,19 @@ public interface ArticleMapper {
      * @return the list
      */
     List<ArticleEntity> listArticleByArticleIdSequence();
+
+    /**
+     * List articles by user id list.
+     *
+     * @param userId the user id
+     * @return the list
+     */
+    List<ArticleEntity> listArticlesByUserId(@Param(value = "userId") Integer userId);
+
+    /**
+     * Delete article.
+     *
+     * @param articleId the article id
+     */
+    void deleteArticle(@Param(value = "articleId") Integer articleId);
 }

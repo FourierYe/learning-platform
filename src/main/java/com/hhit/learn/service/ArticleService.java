@@ -125,8 +125,25 @@ public class ArticleService {
     public PageInfo getArticleByDirectionPrevious(Integer pageNum){
 
         PageHelper.startPage(pageNum, 1);
-//        articleMapper.
-        return null;
+        List<ArticleEntity> articleEntityList = articleMapper.listArticleByArticleIdSequence();
+        PageInfo pageInfo = new PageInfo(articleEntityList);
+
+        return pageInfo;
+    }
+
+    /**
+     * Get article by direction next page info.
+     *
+     * @param pageNum the page num
+     * @return the page info
+     */
+    public PageInfo getArticleByDirectionNext(Integer pageNum){
+
+        PageHelper.startPage(pageNum, 1);
+        List<ArticleEntity> articleEntityList = articleMapper.listArticleByArticleIdSequence();
+        PageInfo pageInfo = new PageInfo(articleEntityList);
+
+        return pageInfo;
     }
 
     /**
@@ -138,5 +155,32 @@ public class ArticleService {
     public Integer countBeforeArticleId(Integer articleId){
 
         return articleMapper.countBeforeArticleId(articleId);
+    }
+
+    /**
+     * List articles by user id page info.
+     *
+     * @param userId  the user id
+     * @param pageNum the page num
+     * @return the page info
+     */
+    public PageInfo listArticlesByUserId(Integer userId, Integer pageNum){
+
+        PageHelper.startPage(pageNum, 10);
+        List<ArticleEntity> articleEntityList = articleMapper.listArticlesByUserId(userId);
+        PageInfo pageInfo = new PageInfo(articleEntityList);
+
+        return pageInfo;
+    }
+
+    /**
+     * Delete article.
+     *
+     * @param articleId the article id
+     */
+    public void deleteArticle(Integer articleId){
+
+        articleMapper.deleteArticle(articleId);
+
     }
 }

@@ -1,8 +1,12 @@
 package com.hhit.learn.controller;
 
+import com.github.pagehelper.PageInfo;
+import com.hhit.learn.entity.ArticleEntity;
 import com.hhit.learn.entity.UserEntity;
+import com.hhit.learn.service.ArticleService;
 import com.hhit.learn.service.UserService;
 import com.hhit.learn.util.RegexUtil;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,6 +18,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.util.List;
 import java.util.regex.Pattern;
 
 /**
@@ -29,6 +34,9 @@ public class UserController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private ArticleService articleService;
 
     /**
      * Sets user service.
@@ -133,6 +141,66 @@ public class UserController {
 
     }
 
+    /**
+     * Safety exit string.
+     *
+     * @param httpSession the http session
+     * @return the string
+     */
+    @RequestMapping(value = "/safetyExit", method = RequestMethod.GET)
+    public String safetyExit(HttpSession httpSession){
 
+        httpSession.invalidate();
+        return "redirect:/home";
+    }
+
+    /**
+     * Delete article string.
+     *
+     * @param pageNum     the page num
+     * @param httpSession the http session
+     * @param model       the model
+     * @return the string
+     */
+    @RequestMapping(value = "/user/showDeleteArticle", method = RequestMethod.GET)
+    public String showDeleteArticle(@RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum,
+                                    HttpSession httpSession,
+                                    Model model){
+
+        Integer userId = (Integer) httpSession.getAttribute("USER_ID");
+
+        PageInfo pageInfo = articleService.listArticlesByUserId(userId, pageNum);
+        List<ArticleEntity> articleEntityList = pageInfo.getList();
+        pageNum = pageInfo.getPageNum();
+        Integer pages = pageInfo.getPages();
+
+        model.addAttribute("pages", pages);
+        model.addAttribute("articleEntityList", articleEntityList);
+        model.addAttribute("pageNum", pageNum);
+
+        return "templates/delete_article";
+    }
+
+
+    @RequestMapping(value = "/user/showUpdateArticle")
+    public String showUpdateArticle(@RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum,
+                                    HttpSession httpSession,
+                                    Model model){
+
+        Integer userId = (Integer) httpSession.getAttribute("USER_ID");
+
+        PageInfo pageInfo = articleService.listArticlesByUserId(userId, pageNum);
+        List<ArticleEntity> articleEntityList = pageInfo.getList();
+        pageNum = pageInfo.getPageNum();
+        Integer pages = pageInfo.getPages();
+
+        model.addAttribute("pages", pages);
+        model.addAttribute("articleEntityList", articleEntityList);
+        model.addAttribute("pageNum", pageNum);
+
+        return "templates/show_update_article";
+
+
+    }
 
 }

@@ -37,7 +37,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">主页</a>
+            <a class="navbar-brand" href="/home">主页</a>
         </div>
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -72,14 +72,6 @@
                         <li>
                             <a href="/student/login">学生登陆</a>
                         </li>
-                        <li role="separator" class="divider"></li>
-                        <li>
-                            <a href="/write">资料上传与修改</a>
-                        </li>
-                        <li role="separator" class="divider"></li>
-                        <li>
-                            <a href="/adminLogin">管理员登陆</a>
-                        </li>
                     </ul>
                 </li>
             </ul>
@@ -93,7 +85,7 @@
         <!-- /.navbar-collapse -->
     </div>
 </nav>
-
+<#if article??>
   <!--根据Id展示文章-->
   <div class="container">
     <div class="row">
@@ -105,16 +97,46 @@
           </h2>
         </div>
         <div class="content" id="content">${article.articleContent }</div>
-          <nav aria-label="...">
-              <ul class="pager">
-                  <li><a href="/getArticleByDirection?beforeNum=${beforeNum}&direction=Previous">Previous</a></li>
-                  <li><a href="/getArticleByDirection?beforeNum=${beforeNum}&direction=Next">Next</a></li>
-              </ul>
-          </nav>
+          <#if beforeNum??>
+              <nav aria-label="...">
+                  <ul class="pager">
+                      <li><a href="/getArticleByDirection?beforeNum=${beforeNum}&direction=Previous">Previous</a></li>
+                      <li><a href="/getArticleByDirection?beforeNum=${beforeNum}&direction=Next">Next</a></li>
+                  </ul>
+              </nav>
+          </#if>
       </div>
       <div class="col-md-1"></div>
     </div>
   </div>
+</#if>
+<#if articleEntityList??>
+<!--根据articleEntityList展示文章-->
+    <#list articleEntityList as article>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-1"></div>
+                <div class="col-md-10">
+                    <div class="page-header">
+                        <h2 style="text-align: center">${article.articleTitle}
+                            <small>${article.articleCategory}</small>
+                        </h2>
+                    </div>
+                    <div class="content" id="content">${article.articleContent }</div>
+                    <#if beforeNum??>
+                        <nav aria-label="...">
+                            <ul class="pager">
+                                <li><a href="/getArticleByDirection?beforeNum=${beforeNum}&direction=Previous">Previous</a></li>
+                                <li><a href="/getArticleByDirection?beforeNum=${beforeNum}&direction=Next">Next</a></li>
+                            </ul>
+                        </nav>
+                    </#if>
+                </div>
+                <div class="col-md-1"></div>
+            </div>
+        </div>
+    </#list>
+</#if>
   <#if filesName??>
     <div class="container">
       <div class="row">

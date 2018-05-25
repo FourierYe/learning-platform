@@ -71,4 +71,9 @@ public class TestController {
         return "templates/article_file";
     }
 
+    @RequestMapping(value = "/delete_article")
+    public String testdelete_article(){
+
+        return "templates/delete_article";
+    }
 }

@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpSession;
 import java.io.File;
@@ -177,6 +178,9 @@ public class ForwardController {
     /**
      * Show articles by category string.
      *
+     * @param articleCategory the article category
+     * @param pageNum         the page num
+     * @param model           the model
      * @return the string
      */
     @RequestMapping(value = "/showArticlesByCategory")
@@ -200,20 +204,43 @@ public class ForwardController {
         return "templates/articles";
     }
 
+    /**
+     * Gets article by direction.
+     *
+     * @param beforeNum the before num
+     * @param direction the direction
+     * @param model     the model
+     * @return the article by direction
+     */
     @RequestMapping(value = "/getArticleByDirection", method = RequestMethod.GET)
     public String getArticleByDirection(@RequestParam(value = "beforeNum") Integer beforeNum,
-                                        @RequestParam(value = "direction") String direction){
+                                        @RequestParam(value = "direction") String direction,
+                                        Model model){
 
         if(direction.equals("Previous")){
+            PageInfo pageInfo = articleService.getArticleByDirectionPrevious(beforeNum);
 
-            return "";
+            List<ArticleEntity> articleEntityList = pageInfo.getList();
+
+            model.addAttribute("articleEntityList", articleEntityList);
+            model.addAttribute("beforeNum", beforeNum-1);
         }
 
         if(direction.equals("Next")){
+            PageInfo pageInfo = articleService.getArticleByDirectionNext(beforeNum+1);
 
-            return "";
+            List<ArticleEntity> articleEntityList = pageInfo.getList();
+
+            model.addAttribute("articleEntityList", articleEntityList);
+            model.addAttribute("beforeNum", beforeNum+1);
         }
 
-        return "";
+        return "templates/article";
+    }
+
+    @RequestMapping(value = "/user/showSaveArticle")
+    public String showSaveArticle(){
+
+        return "templates/user_home";
     }
 }

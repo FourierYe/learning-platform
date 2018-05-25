@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpSession;
 
@@ -62,5 +63,22 @@ public class ArticleController {
         return "templates/article_file";
     }
 
+    /**
+     * Delete article string.
+     *
+     * @param articleId          the article id
+     * @param pageNum            the page num
+     * @param redirectAttributes the redirect attributes
+     * @return the string
+     */
+    @RequestMapping(value = "/user/deleteArticle")
+    public String deleteArticle(@RequestParam(value = "articleId") Integer articleId,
+                                @RequestParam(value = "pageNum") Integer pageNum,
+                                RedirectAttributes redirectAttributes){
 
+        articleService.deleteArticle(articleId);
+        redirectAttributes.addAttribute("pageNum", pageNum);
+
+        return "redirect:/user/showDeleteArticle";
+    }
 }
