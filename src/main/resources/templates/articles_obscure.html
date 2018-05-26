@@ -85,7 +85,6 @@
     </div>
 </nav>
 
-<!--展示最新5期文章-->
 <#list articleEntityList as article>
     <div class="container">
         <div class="row">
@@ -96,7 +95,7 @@
                         <small>${article.articleCategory}</small>
                     </h2>
                 </div>
-                <div class="content" id="content">${article.articleContent }</div>
+                <div class="content" id="content">${article.articleContent}</div>
                 <div>
                     <p>
                         <a class="btn btn-info btn-lg" href="/showArticleById?articleId=${article.pkArticleId}" role="button">Learn more</a>
@@ -107,40 +106,6 @@
         </div>
     </div>
 </#list>
-
-<!--分页链接-->
-<#if pages??>
-    <div class="container" style="text-align: center">
-        <nav aria-label="Page navigation">
-            <#if pages!=0>
-                <ul class="pagination">
-                        <li>
-                            <a href="/showArticlesByCategory?articleCategory=${articleCategory}&pageNum=${pageNum-1}" aria-label="Previous"><span aria-hidden="true">&laquo;</span>
-                            </a>
-                        </li>
-                    <#list 1..pages!1 as i>
-                        <#if pageNum==i>
-                            <li class="active">
-                                <a href="/showArticlesByCategory?articleCategory=${articleCategory}&pageNum=${i}">${i}
-                                </a>
-                            </li>
-                        <#else/>
-                            <li>
-                                <a href="/showArticlesByCategory?articleCategory=${articleCategory}&pageNum=${i}">${i}
-                                </a>
-                            </li>
-                        </#if>
-                    </#list>
-                    <li>
-                        <a href="/showArticlesByCategory?articleCategory=${articleCategory}&pageNum=${pageNum+1}" aria-label="Next">
-                            <span aria-hidden="true">&raquo;</span>
-                        </a>
-                    </li>
-                </ul>
-            </#if>
-        </nav>
-    </div>
-</#if>
 <!--页脚-->
 <footer class="footer" id="footer">
     <div class="container">

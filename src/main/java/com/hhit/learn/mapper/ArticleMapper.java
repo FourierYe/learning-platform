@@ -96,4 +96,25 @@ public interface ArticleMapper {
      * @param articleId the article id
      */
     void deleteArticle(@Param(value = "articleId") Integer articleId);
+
+    /**
+     * Update article.
+     *
+     * @param articleId       the article id
+     * @param articleTitle    the article title
+     * @param articleCategory the article category
+     * @param articleContent  the article content
+     */
+    void updateArticle(@Param(value = "articleId") Integer articleId,
+                       @Param(value = "articleTitle") String articleTitle,
+                       @Param(value = "articleCategory") String articleCategory,
+                       @Param(value = "articleContent") String articleContent);
+
+    /**
+     * List article by content obscure list.
+     *
+     * @param articleContent the article content
+     * @return the list
+     */
+    List<ArticleEntity> listArticleByContentObscure(@Param(value = "articleContent") String articleContent);
 }

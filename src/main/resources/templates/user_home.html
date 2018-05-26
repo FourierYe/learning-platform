@@ -64,8 +64,8 @@
             <div class="col-md-4"></div>
             <div class="col-md-4">
                 <div class="form-group">
-                    <input type="text" class="form-control" id="exampleInputEmail1" placeholder="文章标题"
-                           name="articleTitle">
+                        <input type="text" class="form-control" id="exampleInputEmail1" placeholder="文章标题"
+                           name="articleTitle" <#if articleTitle??> value="${articleTitle} </#if>" >
                 </div>
                 <div class="form-group">
                     <select data-toggle="select" class="form-control select select-inverse" name="articleCategory">
@@ -82,12 +82,14 @@
             <div class="col-md-4"></div>
         </div>
         <!--编辑区-->
-        <div id="layout">
-            <div id="test-editormd">
-                <textarea class="editormd-markdown-textarea" name="test-editormd-markdown-doc"></textarea>
-                <!-- 第二个隐藏文本域，用来构造生成的HTML代码，方便表单POST提交，这里的name可以任意取，后台接受时以这个name键为准 -->
-                <textarea class="editormd-html-textarea" name="articleContent"></textarea></div>
-        </div>
+
+            <div id="layout">
+                <div id="test-editormd">
+                    <textarea class="editormd-markdown-textarea" name="test-editormd-markdown-doc"></textarea>
+                    <!-- 第二个隐藏文本域，用来构造生成的HTML代码，方便表单POST提交，这里的name可以任意取，后台接受时以这个name键为准 -->
+                    <textarea class="editormd-html-textarea" name="articleContent"><#if articleContent??> ${articleContent}  </#if></textarea></div>
+            </div>
+
         <div style="text-align: center">
             <input type="submit" class="btn btn-success" value="提交"/>
         </div>

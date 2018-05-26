@@ -183,4 +183,29 @@ public class ArticleService {
         articleMapper.deleteArticle(articleId);
 
     }
+
+    /**
+     * Update article.
+     *
+     * @param articleId       the article id
+     * @param articleTitle    the article title
+     * @param articleCategory the article category
+     * @param articleContent  the article content
+     */
+    public void updateArticle(Integer articleId, String articleTitle,
+                              String articleCategory, String articleContent){
+
+        articleMapper.updateArticle(articleId, articleTitle, articleCategory, articleContent);
+    }
+
+    /**
+     * List article by content obscure list.
+     *
+     * @param articleContent the article content
+     * @return the list
+     */
+    public List<ArticleEntity> listArticleByContentObscure(String articleContent){
+
+        return articleMapper.listArticleByContentObscure(articleContent);
+    }
 }

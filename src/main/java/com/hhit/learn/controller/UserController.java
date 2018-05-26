@@ -181,7 +181,14 @@ public class UserController {
         return "templates/delete_article";
     }
 
-
+    /**
+     * Show update article string.
+     *
+     * @param pageNum     the page num
+     * @param httpSession the http session
+     * @param model       the model
+     * @return the string
+     */
     @RequestMapping(value = "/user/showUpdateArticle")
     public String showUpdateArticle(@RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum,
                                     HttpSession httpSession,
@@ -200,7 +207,21 @@ public class UserController {
 
         return "templates/show_update_article";
 
-
     }
 
+    @RequestMapping(value = "/user/showUpdateArticleById")
+    public String showUpdateArticleById(@RequestParam(value = "articleId") Integer articleId,
+                                        Model model){
+
+        ArticleEntity articleEntity = articleService.getArticleById(articleId);
+        String articleTitle = articleEntity.getArticleTitle();
+        String articleCategory = articleEntity.getArticleCategory();
+        String articleContent = articleEntity.getArticleContent();
+
+        model.addAttribute("articleTitle", articleTitle);
+        model.addAttribute("articleCategory", articleCategory);
+        model.addAttribute("articleContent", articleContent);
+        model.addAttribute("articleId", articleId);
+        return "templates/user_home";
+    }
 }

@@ -81,4 +81,24 @@ public class ArticleController {
 
         return "redirect:/user/showDeleteArticle";
     }
+
+    /**
+     * Update article string.
+     *
+     * @param articleId       the article id
+     * @param articleTitle    the article title
+     * @param articleCategory the article category
+     * @param articleContent  the article content
+     * @return the string
+     */
+    @RequestMapping(value = "/user/updateArticle")
+    public String updateArticle(@RequestParam(value = "articleId") Integer articleId,
+                                @RequestParam(value = "articleTitle") String articleTitle,
+                                @RequestParam(value = "articleCategory") String articleCategory,
+                                @RequestParam(value = "articleContent") String articleContent){
+
+        articleService.updateArticle(articleId, articleTitle, articleCategory, articleContent);
+
+        return "redirect:/user/showUpdateArticle";
+    }
 }

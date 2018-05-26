@@ -152,8 +152,9 @@ public class ForwardController {
      * @return the string
      */
     @RequestMapping(value = "/user/forwardSaveArticle", method = RequestMethod.GET)
-    public String forwardSaveArticle(){
+    public String forwardSaveArticle(HttpSession httpSession){
 
+        httpSession.removeAttribute("articleId");
         return "templates/user_home";
     }
 
@@ -242,5 +243,15 @@ public class ForwardController {
     public String showSaveArticle(){
 
         return "templates/user_home";
+    }
+
+    @RequestMapping(value = "/listArticleByContentObscure", method = RequestMethod.POST)
+    public String listArticleByContentObscure(@RequestParam(value = "articleContentField") String articleContentField,
+                                              Model model){
+
+        List<ArticleEntity> articleEntityList = articleService.listArticleByContentObscure(articleContentField);
+
+        model.addAttribute("articleEntityList", articleEntityList);
+        return "templates/articles_obscure";
     }
 }

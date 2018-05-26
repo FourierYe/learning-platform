@@ -120,9 +120,27 @@ public class ArticleMapperTest {
     }
 
     @Test
-    public void listArticlesByUserId(){
+    public void listArticlesByUserIdTest(){
 
         List<ArticleEntity> articleEntityList = articleMapper.listArticlesByUserId(16);
+
+        for (ArticleEntity a : articleEntityList
+             ) {
+            System.out.println(a.toString());
+        }
+    }
+
+    @Test
+    public void updateArticleTest(){
+
+        articleMapper.updateArticle(108, "updateArticleTest123", null, null);
+
+    }
+
+    @Test
+    public void listArticleByContentObscureTest(){
+
+        List<ArticleEntity> articleEntityList = articleMapper.listArticleByContentObscure("测试");
 
         for (ArticleEntity a : articleEntityList
              ) {

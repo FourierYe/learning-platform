@@ -76,4 +76,27 @@
         delete from learning_platform.article
         where pk_article_id = #{articleId}
     </delete>
+
+    <!--更改文章-->
+    <update id="updateArticle">
+        update learning_platform.article
+        <set>
+            <if test="articleTitle !=null">
+                article_title = #{articleTitle},
+            </if>
+            <if test="articleCategory !=null">
+                article_category = #{articleCategory},
+            </if>
+            <if test="articleContent !=null">
+                article_content = #{articleContent},
+            </if>
+        </set>
+        where pk_article_id = #{articleId}
+    </update>
+    
+    <!--模糊查找-->
+    <select id="listArticleByContentObscure" resultMap="article">
+        select * from learning_platform.article
+        where article_content like concat('%',#{articleContent},'%')
+    </select>
 </mapper>

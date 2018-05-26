@@ -28,7 +28,9 @@ public class WebConfig extends WebMvcConfigurerAdapter {
         registrationBean.setFilter(xssAndSqlFilter);
         List<String> urlPatterns = new ArrayList();
         //拦截路径，可以添加多个
-        urlPatterns.add("/user/*");
+        urlPatterns.add("/listArticleByContentObscure");
+        urlPatterns.add("/user/doLogin");
+        urlPatterns.add("/doRegister");
         registrationBean.setUrlPatterns(urlPatterns);
         registrationBean.setOrder(1);
         return registrationBean;
