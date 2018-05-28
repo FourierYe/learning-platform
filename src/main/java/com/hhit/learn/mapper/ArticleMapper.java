@@ -28,12 +28,14 @@ public interface ArticleMapper {
      * @param articleTitle    the article title
      * @param articleCategory the article category
      * @param articleContent  the article content
+     * @param articleMarkdown the article markdown
      */
     void saveArticle(@Param(value = "userId") Integer userId,
                      @Param(value = "articleTime") String articleTime,
                      @Param(value = "articleTitle") String articleTitle,
                      @Param(value = "articleCategory") String articleCategory,
-                     @Param(value = "articleContent") String articleContent);
+                     @Param(value = "articleContent") String articleContent,
+                     @Param(value = "articleMarkdown") String articleMarkdown);
 
 
     /**
@@ -104,11 +106,13 @@ public interface ArticleMapper {
      * @param articleTitle    the article title
      * @param articleCategory the article category
      * @param articleContent  the article content
+     * @param articleMarkdown the article markdown
      */
     void updateArticle(@Param(value = "articleId") Integer articleId,
                        @Param(value = "articleTitle") String articleTitle,
                        @Param(value = "articleCategory") String articleCategory,
-                       @Param(value = "articleContent") String articleContent);
+                       @Param(value = "articleContent") String articleContent,
+                       @Param(value = "articleMarkdown") String articleMarkdown);
 
     /**
      * List article by content obscure list.

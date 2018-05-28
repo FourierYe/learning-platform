@@ -49,14 +49,13 @@ public class UploadController {
     @RequestMapping(value="/user/article/uploadPic", method= RequestMethod.POST)
     public void uploadPic(HttpServletRequest request, HttpServletResponse response,
                           @RequestParam(value = "editormd-image-file", required = false) MultipartFile attach){
-
+        logger.info("开始上传图片");
         try {
 
             request.setCharacterEncoding( "utf-8" );
             response.setHeader( "Content-Type" , "text/html" );
             //I:\Projects\hhit\src\main\java\com\hhit\learn\controller\UploadController.java
-            String rootPath = request.getSession().getServletContext().getRealPath("/resources/upload/");
-
+            String rootPath = request.getSession().getServletContext().getRealPath("uploadpic/");
             /**
              * 文件路径不存在则需要创建文件路径
              */
@@ -67,10 +66,11 @@ public class UploadController {
 
             //最终文件名
             File realFile=new File(rootPath+File.separator+attach.getOriginalFilename());
+            logger.info("文件名："+realFile.getPath());
             FileUtils.copyInputStreamToFile(attach.getInputStream(), realFile);
 
             //下面response返回的json格式是editor.md所限制的，规范输出就OK
-            response.getWriter().write( "{\"success\": 1, \"message\":\"上传成功\",\"url\":\"/resources/upload/" + attach.getOriginalFilename() + "\"}" );
+            response.getWriter().write( "{\"success\": 1, \"message\":\"上传成功\",\"url\":\"uploadpic/" + attach.getOriginalFilename() + "\"}" );
         } catch (Exception e) {
             try {
                 response.getWriter().write( "{\"success\":0}" );
@@ -78,6 +78,7 @@ public class UploadController {
                 e1.printStackTrace();
             }
         }
+        logger.info("上传图片成功");
     }
 
     /**
@@ -91,6 +92,7 @@ public class UploadController {
     @RequestMapping(value = "/uploadFile", method = RequestMethod.POST)
     public String handleFileUpload(HttpServletRequest request, Model model) {
 
+        logger.info("开始上传文件");
         HttpSession httpSession = request.getSession();
         Integer userId = (Integer) httpSession.getAttribute("USER_ID");
 
@@ -101,7 +103,7 @@ public class UploadController {
         List<MultipartFile> files = ((MultipartHttpServletRequest) request).getFiles("up_file");
         MultipartFile file = null;
         BufferedOutputStream stream = null;
-        File filePath = new File("/Files"+"/"+articleId);
+        File filePath = new File("Files"+"/"+articleId);
 
         if(!filePath.exists()){
             filePath.mkdirs();
@@ -128,6 +130,7 @@ public class UploadController {
                 return "redirect:/user/forwardUploadFile";
             }
         }
+        logger.info("上传文件成功");
         model.addAttribute("message", "附件添加成功，是否继续添加");
         return "redirect:/user/forwardUploadFile";
     }
@@ -142,14 +145,15 @@ public class UploadController {
     @Transactional(rollbackFor = Exception.class)
     @RequestMapping(value = "/user/deleteFile", method = RequestMethod.GET)
     public String deleteFile(@RequestParam(value = "filename") String filename, HttpSession httpSession){
+        logger.info("开始删除文件");
         String articleId = (String) httpSession.getAttribute("articleId");
 
-        File file = new File("/Files/"+articleId+"/"+filename);
+        File file = new File("Files/"+articleId+"/"+filename);
 
         if (file.exists() && file.isFile()) {
             file.delete();
         }
-
+        logger.info("删除文件成功");
         return "redirect:/user/forwardUploadFile";
     }
 
@@ -164,10 +168,10 @@ public class UploadController {
     @RequestMapping("/downloadFile")
     public void downloadFile(HttpServletRequest request, HttpServletResponse response,
                              @Param(value = "fileName") String fileName, @Param(value = "articleId") String articleId) {
-
+        logger.info("开始下载文件");
         if (fileName != null) {
             //设置文件路径
-            File file = new File("/Files/"+articleId+"/"+fileName);
+            File file = new File("Files/"+articleId+"/"+fileName);
             if (file.exists()) {
                 // 设置强制下载不打开
                 response.setContentType("application/force-download");
@@ -206,6 +210,6 @@ public class UploadController {
                 }
             }
         }
-
+        logger.info("下载文件成功");
     }
 }

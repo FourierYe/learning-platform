@@ -49,13 +49,14 @@ public class ArticleController {
     public String saveArticle(@RequestParam(value = "articleTitle") String articleTitle,
                             @RequestParam(value = "articleCategory") String articleCategory,
                             @RequestParam(value = "articleContent") String articleContent,
+                            @RequestParam(value = "articleMarkdown") String articleMarkdown,
                             HttpSession httpSession){
 
         System.out.println("controller"+articleContent);
 
         Integer userId = (Integer) httpSession.getAttribute("USER_ID");
 
-        articleService.saveArticle(userId, articleTitle, articleCategory, articleContent);
+        articleService.saveArticle(userId, articleTitle, articleCategory, articleContent, articleMarkdown);
         ArticleEntity articleEntity = articleService.getArticleByUserTimeLimitOne(userId);
 
         httpSession.setAttribute("articleId", articleEntity.getPkArticleId().toString());
@@ -95,9 +96,10 @@ public class ArticleController {
     public String updateArticle(@RequestParam(value = "articleId") Integer articleId,
                                 @RequestParam(value = "articleTitle") String articleTitle,
                                 @RequestParam(value = "articleCategory") String articleCategory,
-                                @RequestParam(value = "articleContent") String articleContent){
+                                @RequestParam(value = "articleContent") String articleContent,
+                                @RequestParam(value = "articleMarkdown") String articleMarkdown){
 
-        articleService.updateArticle(articleId, articleTitle, articleCategory, articleContent);
+        articleService.updateArticle(articleId, articleTitle, articleCategory, articleContent, articleMarkdown);
 
         return "redirect:/user/showUpdateArticle";
     }

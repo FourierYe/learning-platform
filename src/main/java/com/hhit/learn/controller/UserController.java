@@ -3,10 +3,13 @@ package com.hhit.learn.controller;
 import com.github.pagehelper.PageInfo;
 import com.hhit.learn.entity.ArticleEntity;
 import com.hhit.learn.entity.UserEntity;
+import com.hhit.learn.interceptor.AuthorityHandlerInterceptor;
 import com.hhit.learn.service.ArticleService;
 import com.hhit.learn.service.UserService;
 import com.hhit.learn.util.RegexUtil;
 import org.apache.ibatis.annotations.Param;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -31,6 +34,8 @@ import java.util.regex.Pattern;
  */
 @Controller
 public class UserController {
+
+    private static Logger logger = LoggerFactory.getLogger(AuthorityHandlerInterceptor.class);
 
     @Autowired
     private UserService userService;
@@ -209,6 +214,13 @@ public class UserController {
 
     }
 
+    /**
+     * Show update article by id string.
+     *
+     * @param articleId the article id
+     * @param model     the model
+     * @return the string
+     */
     @RequestMapping(value = "/user/showUpdateArticleById")
     public String showUpdateArticleById(@RequestParam(value = "articleId") Integer articleId,
                                         Model model){
@@ -217,11 +229,57 @@ public class UserController {
         String articleTitle = articleEntity.getArticleTitle();
         String articleCategory = articleEntity.getArticleCategory();
         String articleContent = articleEntity.getArticleContent();
+        String articleMarkdown = articleEntity.getArticleMarkdown();
+        logger.info("articleMarkdown", articleMarkdown);
 
         model.addAttribute("articleTitle", articleTitle);
         model.addAttribute("articleCategory", articleCategory);
         model.addAttribute("articleContent", articleContent);
         model.addAttribute("articleId", articleId);
-        return "templates/user_home";
+        model.addAttribute("articleMarkdown", articleMarkdown);
+
+        return "templates/update_article";
+    }
+
+    /**
+     * Show safe save article string.
+     *
+     * @param httpSession the http session
+     * @return the string
+     */
+    @RequestMapping(value = "/user/safe/showSaveArticle")
+    public String showSafeSaveArticle(HttpSession httpSession){
+
+        httpSession.removeAttribute("articleId");
+
+        return "redirect:/user/showSaveArticle";
+    }
+
+    /**
+     * Show safe update article string.
+     *
+     * @param httpSession the http session
+     * @return the string
+     */
+    @RequestMapping(value = "/user/safe/showUpdateArticle")
+    public String showSafeUpdateArticle(HttpSession httpSession){
+
+        httpSession.removeAttribute("articleId");
+
+        return "/user/showUpdateArticle";
+    }
+
+    /**
+     * Show safe delete article string.
+     *
+     * @param httpSession the http session
+     * @return the string
+     */
+    @RequestMapping(value = "/user/safe/showDeleteArticle")
+    public String showSafeDeleteArticle(HttpSession httpSession){
+
+        httpSession.removeAttribute("articleId");
+
+        return "/user/showDeleteArticle";
     }
 }

@@ -16,6 +16,15 @@ public class ArticleEntity {
     private String articleCategory;
     private String articleTitle;
     private String articleContent;
+    private String articleMarkdown;
+
+    public String getArticleMarkdown() {
+        return articleMarkdown;
+    }
+
+    public void setArticleMarkdown(String articleMarkdown) {
+        this.articleMarkdown = articleMarkdown;
+    }
 
     /**
      * Gets pk article id.
@@ -125,15 +134,4 @@ public class ArticleEntity {
         this.articleContent = articleContent;
     }
 
-    @Override
-    public String toString() {
-        return "ArticleEntity{" +
-                "pkArticleId=" + pkArticleId +
-                ", userEntity=" + userEntity +
-                ", articleTime='" + articleTime + '\'' +
-                ", articleCategory='" + articleCategory + '\'' +
-                ", articleTitle='" + articleTitle + '\'' +
-                ", articleContent='" + articleContent + '\'' +
-                '}';
-    }
 }

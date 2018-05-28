@@ -9,6 +9,7 @@
         <result column="article_category" property="articleCategory"/>
         <result column="article_title" property="articleTitle"/>
         <result column="article_content" property="articleContent"/>
+        <result column="article_markdown" property="articleMarkdown"/>
 
         <association property="userEntity" javaType="com.hhit.learn.entity.UserEntity">
             <id column="pk_user_id" property="pkUserId"/>
@@ -22,9 +23,8 @@
 
     <!--增加一篇文章-->
     <insert id="saveArticle">
-        INSERT INTO
-        learning_platform.article (user_id, article_time, article_title, article_category, article_content)
-        VALUES (#{userId}, #{articleTime}, #{articleTitle}, #{articleCategory}, #{articleContent})
+        INSERT INTO learning_platform.article(user_id, article_time, article_title, article_category, article_content, article_markdown)
+        VALUE (#{userId}, #{articleTime}, #{articleTitle}, #{articleCategory}, #{articleContent}, #{articleMarkdown})
     </insert>
 
     <!--查询将近期文章显示在主页上-->
@@ -89,6 +89,9 @@
             </if>
             <if test="articleContent !=null">
                 article_content = #{articleContent},
+            </if>
+            <if test="articleMarkdown !=null">
+                article_markdown = #{articleMarkdown},
             </if>
         </set>
         where pk_article_id = #{articleId}

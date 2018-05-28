@@ -134,7 +134,7 @@ public class ForwardController {
     @RequestMapping(value = "/showArticleById", method = RequestMethod.GET)
     public String showArticle(@RequestParam(value = "articleId") Integer pkArticleId,
                               Model model){
-        File file = new File("/Files"+"/"+pkArticleId.toString());
+        File file = new File("Files"+"/"+pkArticleId.toString());
         String [] filesName = file.list();
         model.addAttribute("filesName", filesName);
         model.addAttribute("articleId", pkArticleId.toString());
@@ -170,7 +170,7 @@ public class ForwardController {
 
         String articleId = (String) httpSession.getAttribute("articleId");
 
-        File file = new File("/Files"+"/"+articleId);
+        File file = new File("Files"+"/"+articleId);
         String [] filesname = file.list();
         model.addAttribute("filesname", filesname);
         return "templates/upload_file";

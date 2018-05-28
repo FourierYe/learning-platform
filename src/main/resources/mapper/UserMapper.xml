@@ -20,6 +20,7 @@
             <result column="article_category" property="articleCategory"/>
             <result column="article_title" property="articleTitle"/>
             <result column="article_content" property="articleContent"/>
+            <result column="article_mardown" property="articleMardown"/>
         </collection>
 
     </resultMap>

@@ -45,13 +45,13 @@ public class ArticleService {
      * @param articleContent  the article content
      */
     @Transactional(rollbackFor = Exception.class)
-    public void saveArticle(Integer userId, String articleTitle, String articleCategory, String articleContent){
+    public void saveArticle(Integer userId, String articleTitle, String articleCategory, String articleContent, String articleMarkdown){
 
         System.out.println("service"+articleContent);
         Date date = new Date();
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy年MM月dd日 HH:mm:SS");
         String articleTime = simpleDateFormat.format(date);
-        articleMapper.saveArticle(userId, articleTime, articleTitle, articleCategory, articleContent);
+        articleMapper.saveArticle(userId, articleTime, articleTitle, articleCategory, articleContent, articleMarkdown);
 
     }
 
@@ -193,9 +193,9 @@ public class ArticleService {
      * @param articleContent  the article content
      */
     public void updateArticle(Integer articleId, String articleTitle,
-                              String articleCategory, String articleContent){
+                              String articleCategory, String articleContent, String articleMarkdown){
 
-        articleMapper.updateArticle(articleId, articleTitle, articleCategory, articleContent);
+        articleMapper.updateArticle(articleId, articleTitle, articleCategory, articleContent, articleMarkdown);
     }
 
     /**
